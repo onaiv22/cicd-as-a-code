@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('git-checkout') {
             steps {
-                sh 'git clone https://github.com/onaiv22/terraform-jenkins-aws.git'
+                sh 'sudo rm -f *;git clone https://github.com/onaiv22/terraform-jenkins-aws.git'
             }
         }
         stage('terraform init') {
@@ -21,6 +21,6 @@ pipeline {
                 sh 'terraform plan -input=false out tfplan'
             }
         }
-        
+
     }
 }
