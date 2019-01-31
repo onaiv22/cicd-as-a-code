@@ -7,19 +7,17 @@ pipeline {
     agent {
         docker {
             image 'hashicorp/terraform:light'
-            //label 'dev-env'
-            args 'docker run -i -t hashicorp/terraform:light'
         }
     }
     stages {
-        stage('checkout') {
-            steps {
-                sh 'git clone git clone https://github.com/onaiv22/terraform-jenkins-aws.git'
-            }
-        }
         stage('terraform init') {
             steps {
                 sh 'terraform init -input=false'
+            }
+        }
+        stage('checkout') {
+            steps {
+                sh 'git clone https://github.com/onaiv22/terraform-jenkins-aws.git'
             }
         }
         stage('terraform plan') {
