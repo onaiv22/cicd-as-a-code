@@ -8,7 +8,7 @@ pipeline {
         docker {
             image 'hashicorp/terraform:light'
             //label 'dev-env'
-            //args '-v '
+            args 'docker run -i -t hashicorp/terraform:light'
         }
     }
     stages {
