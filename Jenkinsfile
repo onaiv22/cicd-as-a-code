@@ -4,11 +4,7 @@ pipeline {
 	AWS_ACCESS_KEY_ID = credentials('jenkins-aws-access-key')
         AWS_SECRET_KEY_ID = credentials('jenkins-aws-secret-key')
     }
-    agent {
-        docker {
-            image 'hashicorp/terraform:light'
-        }
-    }
+    agent { dockerfile true}
     stages {
         stage('terraform init') {
             steps {
