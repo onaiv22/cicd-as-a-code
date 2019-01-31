@@ -6,7 +6,7 @@ pipeline {
     }
     agent {
         docker {
-            image 'hashicorp/terraform'
+            image 'hashicorp/terraform:light'
             //label 'dev-env'
             //args '-v '
         }
