@@ -1,6 +1,6 @@
 FROM hashicorp/terraform:light
 WORKDIR /app
-ARG entrypoint=/bin/bash
+ARG '-it --entrypoint=/bin/bash'
 
 
 
