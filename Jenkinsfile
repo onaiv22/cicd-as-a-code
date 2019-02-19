@@ -8,7 +8,7 @@ pipeline {
 	environment {
 	AWS_ACCESS_KEY_ID = credentials('jenkins-aws-access-key')
         AWS_SECRET_KEY_ID = credentials('jenkins-aws-secret-key')
-        TERRAFORM_CMD = 'docker run -w /app -v /var/lib/jenkins/workspace/git-terraform-jenkins-aws/terraform-jenkins-aws/:/app hashicorp/terraform:light'
+        TERRAFORM_CMD = 'docker run -w /app -v /var/lib/jenkins/workspace/git-terraform-jenkins-aws/terraform-jenkins-aws/:/app -v ~/.bashrc:/app hashicorp/terraform:light'
     }
     stages {
         stage('git-checkout') {
@@ -24,6 +24,11 @@ pipeline {
         stage('output terraform version') {
             steps {
                 sh '${TERRAFORM_CMD} --version'
+            }
+        }
+        stage('output terraform version') {
+            steps {
+                sh '${TERRAFORM_CMD}  validate'
             }
         }
     
