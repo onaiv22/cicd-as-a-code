@@ -4,7 +4,12 @@ pipeline {
 	AWS_ACCESS_KEY_ID = credentials('jenkins-aws-access-key')
         AWS_SECRET_KEY_ID = credentials('jenkins-aws-secret-key')
     }
-    agent {dockerfile true}
+    agent {
+        docker {
+            image 'hashicorp/terraform:light'
+            args '-it --entrypoint=/bin/bash'
+        }
+    }
     stages {
         stage('git-checkout') {
             steps {
