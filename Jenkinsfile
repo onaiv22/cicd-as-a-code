@@ -29,7 +29,7 @@ pipeline {
         }
         stage('terraform plan') {
             steps {
-                sh '${TERRAFORM_CMD} plan -input=false out tfplan'
+                sh '${TERRAFORM_CMD} plan -input=false'
             }
         }
 
