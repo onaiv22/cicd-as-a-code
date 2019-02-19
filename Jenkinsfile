@@ -23,7 +23,7 @@ pipeline {
         }
         stage('output terraform version') {
             steps {
-                sh '${terraform_cmd} --version'
+                sh '${TERRAFORM_CMD} --version'
             }
         }
     
