@@ -1,14 +1,14 @@
 #!groovy
 pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
 	environment {
 	AWS_ACCESS_KEY_ID = credentials('jenkins-aws-access-key')
         AWS_SECRET_KEY_ID = credentials('jenkins-aws-secret-key')
-    }
-    agent {
-        docker {
-            image 'hashicorp/terraform:light'
-            //args '-it --entrypoint=/bin/bash'
-        }
+        TERRAFORM_CMD = 'docker run --network host -w /app -v ${HOME}/.aws:/root/.aws hashicorp/terraform:light'
     }
     stages {
         stage('git-checkout') {
@@ -16,14 +16,20 @@ pipeline {
                 sh 'rm -rf *;git clone https://github.com/onaiv22/terraform-jenkins-aws.git'
             }
         }
+        stage('pull terraform light image') {
+            steps {
+                sh 'docker pull hashicorp/terraform:light'
+            }
+        }
+    
         stage('terraform init') {
             steps {
-                sh 'terraform init -input=false'
+                sh '${TERRAFORM_CMD} init -input=false'
             }
         }
         stage('terraform plan') {
             steps {
-                sh 'terraform plan -input=false out tfplan'
+                sh '${TERRAFORM_CMD} plan -input=false out tfplan'
             }
         }
 
