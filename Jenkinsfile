@@ -8,7 +8,7 @@ pipeline {
 	environment {
 	AWS_ACCESS_KEY_ID = credentials('jenkins-aws-access-key')
         AWS_SECRET_KEY_ID = credentials('jenkins-aws-secret-key')
-        TERRAFORM_CMD = 'docker run --network host -w /app -v /root/.aws:/root/.aws hashicorp/terraform:light'
+        TERRAFORM_CMD = 'docker run --network host -w /app -v /root/.aws:/root/.aws -v `pwd`:/app hashicorp/terraform:light'
     }
     stages {
         stage('git-checkout') {
