@@ -26,12 +26,7 @@ pipeline {
                 sh '${TERRAFORM_CMD} --version'
             }
         }
-        stage('output terraform validate') {
-            steps {
-                sh '${TERRAFORM_CMD}  validate'
-            }
-        }
-    
+        
         stage('terraform init') {
             steps {
                 sh '${TERRAFORM_CMD} init -input=false'
