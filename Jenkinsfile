@@ -8,7 +8,7 @@ pipeline {
 	environment {
 	    AWS_ACCESS_KEY_ID = credentials('jenkins-aws-access-key')
         AWS_SECRET_KEY_ID = credentials('jenkins-aws-secret-key')
-        TERRAFORM_CMD = 'docker run -w /app cp /root/terraform.tfvars:/app -v /var/lib/jenkins/workspace/git-terraform-jenkins-aws/terraform-jenkins-aws/:/app -e $AWS_ACCESS_KEY_ID -e AWS_SECRET_KEY_ID hashicorp/terraform:light'
+        TERRAFORM_CMD = 'docker run -w /app -cp /root/terraform.tfvars:/app -v /var/lib/jenkins/workspace/git-terraform-jenkins-aws/terraform-jenkins-aws/:/app -e $AWS_ACCESS_KEY_ID -e AWS_SECRET_KEY_ID hashicorp/terraform:light'
         TF_IN_AUTOMATION = '1'
     }
     stages {
